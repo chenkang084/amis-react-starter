@@ -1,14 +1,15 @@
 const path = require('path');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const webpack = require('webpack');
+
+
 
 module.exports = {
   mode: 'development',
-  entry: {
-    index: './src/index.tsx'
-  },
+  entry: { index: ['webpack-hot-middleware/client?reload=true', './src/index.tsx'] },
   module: {
     rules: [
       {
@@ -42,7 +43,8 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin({cleanStaleWebpackAssets: false}),
+    new webpack.HotModuleReplacementPlugin(), // Tell webpack we want hot reloading
+    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),
