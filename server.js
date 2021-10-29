@@ -14,7 +14,7 @@ app.use(
 );
 app.use(webpackHotMiddleware(compiler));
 
-app.post('/api/form', (req, res) => {
+app.post('/aui/api/form', (req, res) => {
   res.json({
     status: 0,
     msg: 'success'

@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const webpack = require('webpack');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 
 
@@ -43,6 +44,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new HardSourceWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(), // Tell webpack we want hot reloading
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new HtmlWebpackPlugin({
@@ -63,11 +65,11 @@ module.exports = {
     hot: true,
     proxy: {
       '/api': 'http://localhost:3000'
-    }
+    },
   },
   output: {
     filename: '[name].bundle.js',
-    publicPath: '/',
+    publicPath: '/aui',
     path: path.resolve(__dirname, 'dist')
   }
 };
